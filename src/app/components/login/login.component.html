@@ -1,0 +1,18 @@
+<div id="login">
+    <div class="login-box">
+        <h2>MBFinanceAI</h2>
+        <form (ngSubmit)="login()">
+            <div class="textbox">
+                <input type="text" [disabled]="loading" [(ngModel)]="username" name="username" placeholder="Username" required  />
+            </div>
+            <div class="textbox">
+                <input type="password" [disabled]="loading" [(ngModel)]="password" name="password" placeholder="Password" required />
+            </div>
+            <button type="submit" [disabled]="loading">
+                <span *ngIf="loading" class="loading">
+                </span>
+                <span *ngIf="!loading">Login</span>
+            </button>
+        </form>
+    </div>
+</div>
