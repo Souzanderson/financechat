@@ -3,7 +3,7 @@ import { messageType } from '../../types/messagetype';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChatrepositoryService } from '../../repostiories/chatrepository.service';
-import { decodeMessage, decodeMessages } from '../../infra/decodemessage';
+import { decodeTypeMessage } from '../../infra/decodemessage';
 
 @Component({
   selector: 'chat',
@@ -29,7 +29,10 @@ export class ChatComponent {
         .sendMessage(message)
         .then((response) => {
           console.log('Message sent successfully:', response);
-          decodeMessages(response.items).forEach((decodedMessage) => {
+          // decodeMessages(response.items).forEach((decodedMessage) => {
+          //   this.messages.push(decodedMessage);
+          // });
+          decodeTypeMessage(response).forEach((decodedMessage) => {
             this.messages.push(decodedMessage);
           });
         })

@@ -5,6 +5,11 @@
   display: grid;
   grid-template-rows: auto 1fr auto;
   .chat-messages {
+    height: 100%;
+    overflow-y: auto;
+    .message-user {
+      max-width: calc(100vw - 48px);
+    }
     .message-sended {
       background-color: var(--tertiary-color);
       color: var(--text-color);
@@ -34,6 +39,8 @@
     background-color: var(--primary-color);
     color: var(--text-color);
     font-size: 1.2em;
+    max-height: 64px;
+    height: 64px;
   }
   .chat-input {
     display: flex;
@@ -42,6 +49,8 @@
     margin: 10px 20px;
     color: var(--text-color);
     font-size: 1.2em;
+    max-height: 64px;
+    height: 64px;
     input {
       width: 100%;
       padding: 10px;

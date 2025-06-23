@@ -10,3 +10,16 @@ export type ReceivedMessageType = {
   total: number;
   valor_parcela_atual: number;
 };
+
+export type ReceivedMessageTotaisType = {
+  despesas: number;
+  receitas: number;
+  month: string; // e.g., "06"
+  year: number; // e.g., 2025
+};
+
+export type MessageReturnType = {
+  items: ReceivedMessageType[];
+  totais: ReceivedMessageTotaisType;
+  error?: string;
+};

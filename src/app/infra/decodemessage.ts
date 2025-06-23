@@ -1,5 +1,9 @@
 import { messageType } from '../types/messagetype';
-import { ReceivedMessageType } from '../types/recevedmessagetype';
+import {
+  MessageReturnType,
+  ReceivedMessageTotaisType,
+  ReceivedMessageType,
+} from '../types/recevedmessagetype';
 
 export const decodeMessage = (message: ReceivedMessageType): messageType => {
   const textMessage =
@@ -20,8 +24,43 @@ export const decodeMessage = (message: ReceivedMessageType): messageType => {
   };
 };
 
+export const decodeTotaisMessage = (
+  message: ReceivedMessageTotaisType
+): messageType => {
+  const textMessage =
+    `<b>Despesas Totais:</b> ${Number(message.despesas).toFixed(2)}<br />` +
+    `<b>Receitas Totais:</b> ${Number(message.receitas).toFixed(2)}<br />` +
+    `<b> Referente ao período: </b> ${message.month}` +
+    `/${message.year}`;
+  return {
+    text: textMessage,
+    status: 'delivered', // Assuming the status is 'delivered' for received messages
+  };
+};
+
 export const decodeMessages = (
   messages: ReceivedMessageType[]
 ): messageType[] => {
   return messages.map(decodeMessage);
+};
+
+export const decodeTypeMessage = (
+  message: MessageReturnType
+): messageType[] => {
+  if (message?.items?.length > 0) {
+    return decodeMessages(message.items);
+  }
+  if (message?.totais) {
+    return [decodeTotaisMessage(message.totais)];
+  }
+  if (message?.error) {
+    return [
+      {
+        text: `${message.error}`,
+        status: 'delivered', // Assuming the status is 'delivered' for error messages
+      },
+    ];
+  }
+
+  return [];
 };
