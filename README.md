@@ -1,27 +1,60 @@
-# Financechat
+# FinanceChat
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
+FinanceChat is a web-based chat application designed to assist users with financial queries and tasks. Built with a modern frontend stack, it aims to provide a seamless and interactive experience for managing and understanding personal or business finances.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Real-time chat interface
+- Integration with financial APIs
+- User authentication and authorization
+- Responsive design for desktop and mobile
+- Customizable user settings
 
-## Code scaffolding
+## Getting Started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Prerequisites
 
-## Build
+- Node.js (v16+ recommended)
+- npm or yarn
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Installation
 
-## Running unit tests
+```bash
+git clone https://github.com/yourusername/financechat.git
+cd financechat
+npm install
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Running the App
 
-## Running end-to-end tests
+```bash
+npm start
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+The app will be available at `http://localhost:3000`.
 
-## Further help
+## Project Structure
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```
+frontend/financechat/
+├── public/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── services/
+│   └── App.js
+├── package.json
+└── README.md
+```
+
+## Contributing
+
+Contributions are welcome! Please open issues or submit pull requests for improvements and bug fixes.
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+*Created by Anderson da Silva*
