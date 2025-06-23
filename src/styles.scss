@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --primary-color: #1e1c28;
+  --secondary-color: #333147;
+  --tertiary-color: #016bff;
+  --back-color: #252331;
+  --text-color: #dcfffe;
+}
+
+@font-face {
+  font-family: "MonaSans";
+  src: url("../public/font/static/MonaSans-Regular.ttf") format("truetype");
+  font-display: swap; /* Ensures text is displayed while the font loads */
+}
+
+@font-face {
+  font-family: "MonaSans";
+  font-weight: bold;
+  src: url("../public/font/static/MonaSans-Bold.ttf") format("truetype");
+  font-display: swap; /* Ensures text is displayed while the font loads */
+}
+
+@font-face {
+  font-family: "MonaSans";
+  font-weight: 300;
+  src: url("../public/font/static/MonaSans-Light.ttf") format("truetype");
+  font-display: swap; /* Ensures text is displayed while the font loads */
+}
+
+@font-face {
+  font-family: "MonaSans";
+  font-style: italic;
+  src: url("../public/font/static/MonaSans-Italic.ttf") format("truetype");
+  font-display: swap; /* Ensures text is displayed while the font loads */
+}
+
+*,
+body,
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "MonaSans", sans-serif;
+  color: var(--text-color);
+}
