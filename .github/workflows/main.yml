@@ -18,4 +18,4 @@ jobs:
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
           server-dir: /
-          local-dir: ./dist/financechat/
+          local-dir: ./dist/financechat/browser
