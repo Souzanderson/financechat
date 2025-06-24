@@ -14,6 +14,7 @@ export type ReceivedMessageType = {
 export type ReceivedMessageTotaisType = {
   despesas: number;
   receitas: number;
+  deficit: number;
   month: string; // e.g., "06"
   year: number; // e.g., 2025
 };

@@ -1,3 +1,4 @@
+import { text } from 'stream/consumers';
 import { messageType } from '../types/messagetype';
 import {
   MessageReturnType,
@@ -27,11 +28,23 @@ export const decodeMessage = (message: ReceivedMessageType): messageType => {
 export const decodeTotaisMessage = (
   message: ReceivedMessageTotaisType
 ): messageType => {
-  const textMessage =
+  let textMessage =
     `<b>Despesas Totais:</b> ${Number(message.despesas).toFixed(2)}<br />` +
-    `<b>Receitas Totais:</b> ${Number(message.receitas).toFixed(2)}<br />` +
-    `<b> Referente ao período: </b> ${message.month}` +
-    `/${message.year}`;
+    `<b>Receitas Totais:</b> ${Number(message.receitas).toFixed(2)}<br />`;
+
+  if (Number(message.deficit) < 0) {
+    textMessage += `<b>Déficit:</b> <span class='deficit'>${Number(
+      message.deficit
+    ).toFixed(2)}</span><br />`;
+  } else {
+    textMessage += `<b>Sobra:</b> <span class='sobra'>${Number(
+      message.deficit
+    ).toFixed(2)}</span><br />`;
+  }
+
+  textMessage +=
+    `<b> Referente ao período: </b> ${message.month}` + `/${message.year}`;
+
   return {
     text: textMessage,
     status: 'delivered', // Assuming the status is 'delivered' for received messages

@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { messageType } from '../../types/messagetype';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChatrepositoryService } from '../../repostiories/chatrepository.service';
 import { decodeTypeMessage } from '../../infra/decodemessage';
+import { getUserToken } from '../../infra/dbuser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'chat',
@@ -16,7 +18,33 @@ export class ChatComponent {
   public messages: messageType[] = [];
   public messagetext: string = '';
 
-  constructor(private repo: ChatrepositoryService) {}
+  constructor(private repo: ChatrepositoryService, private router: Router) {}
+
+  ngOnInit(): void {
+    if (typeof window !== 'undefined') {
+      const token = getUserToken();
+      if (!token) {
+        console.error('User token not found. Please log in.');
+        this.router.navigate(['/']);
+      }
+    }
+  }
+
+  scrollToBottom(): void {
+    setTimeout(() => {
+      if (document) {
+        const chatMessages = document.getElementById('chatMessages');
+        console.log(
+          'Scrolling to bottom of chat messages',
+          chatMessages?.scrollHeight
+        );
+
+        if (chatMessages) {
+          chatMessages.scrollTo(0, chatMessages.scrollHeight);
+        }
+      }
+    }, 100);
+  }
 
   sendMessage(): void {
     if (this.messagetext.trim()) {
@@ -35,11 +63,13 @@ export class ChatComponent {
           decodeTypeMessage(response).forEach((decodedMessage) => {
             this.messages.push(decodedMessage);
           });
+          this.scrollToBottom();
         })
         .catch((error) => {
           console.error('Error sending message:', error);
         });
       this.messagetext = '';
     }
+    this.scrollToBottom();
   }
 }
