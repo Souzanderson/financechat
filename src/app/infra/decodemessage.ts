@@ -19,6 +19,7 @@ export const decodeMessage = (message: ReceivedMessageType): messageType => {
     `<b>Total:</b> ${message.total.toFixed(2)}<br />` +
     `<b>Valor da Parcela:</b> ${message.valor_parcela_atual.toFixed(2)}<br />` +
     `<b>Data da Parcela:</b> ${new Date(message.date_create).toLocaleString()}`;
+
   return {
     text: textMessage,
     status: 'delivered', // Assuming the status is 'delivered' for received messages
