@@ -10,6 +10,7 @@
                 <!-- <p [innerHTML]="message.text"></p> -->
             </div>
         </div>
+        <waiting *ngIf="loading"></waiting>
     </div>
     <div class="chat-input">
         <input type="text" [(ngModel)]="messagetext" placeholder="Type your message here..." (keydown.enter)="sendMessage()" />

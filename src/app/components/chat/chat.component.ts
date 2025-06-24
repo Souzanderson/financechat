@@ -6,17 +6,19 @@ import { ChatrepositoryService } from '../../repostiories/chatrepository.service
 import { decodeTypeMessage } from '../../infra/decodemessage';
 import { getUserToken } from '../../infra/dbuser';
 import { Router } from '@angular/router';
+import { WaitingComponent } from '../waiting/waiting.component';
 
 @Component({
   selector: 'chat',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, WaitingComponent],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss',
 })
 export class ChatComponent {
   public messages: messageType[] = [];
   public messagetext: string = '';
+  public loading: boolean = false;
 
   constructor(private repo: ChatrepositoryService, private router: Router) {}
 
@@ -34,16 +36,18 @@ export class ChatComponent {
     setTimeout(() => {
       if (document) {
         const chatMessages = document.getElementById('chatMessages');
-        console.log(
-          'Scrolling to bottom of chat messages',
-          chatMessages?.scrollHeight
-        );
-
         if (chatMessages) {
           chatMessages.scrollTo(0, chatMessages.scrollHeight);
         }
       }
     }, 100);
+  }
+
+  setLoading(value: boolean, delay: number = 10): void {
+    setTimeout(() => {
+      this.loading = value;
+      this.scrollToBottom();
+    }, delay);
   }
 
   sendMessage(): void {
@@ -53,6 +57,7 @@ export class ChatComponent {
         status: 'sent',
       };
       this.messages.push(message);
+      this.setLoading(true, 300);
       this.repo
         .sendMessage(message)
         .then((response) => {
@@ -64,9 +69,11 @@ export class ChatComponent {
             this.messages.push(decodedMessage);
           });
           this.scrollToBottom();
+          this.setLoading(false);
         })
         .catch((error) => {
           console.error('Error sending message:', error);
+          this.setLoading(false);
         });
       this.messagetext = '';
     }

@@ -9,9 +9,9 @@ import {
 export const decodeMessage = (message: ReceivedMessageType): messageType => {
   const textMessage =
     `<b>Item:</b> ${message.item}<br />` +
-    `<b>Natureza:</b> ${
-      message.natureza == 'entrada' ? 'Entrada' : 'Saída'
-    }<br />` +
+    `<b>Natureza:</b> <span class="${
+      message.natureza == 'entrada' ? 'sobra' : 'deficit'
+    }">${message.natureza == 'entrada' ? 'Entrada' : 'Saída'}</span><br />` +
     `<b>Parcela:</b> ${message.parcela_atual}<br />` +
     `<b>Parcelado:</b> ${message.parcelado ? 'Sim' : 'Não'}<br />` +
     `<b>Total de Parcelas:</b> ${message.parcelas}<br />` +
@@ -29,11 +29,15 @@ export const decodeTotaisMessage = (
   message: ReceivedMessageTotaisType
 ): messageType => {
   let textMessage =
-    `<b>Despesas Totais:</b> ${Number(message.despesas).toFixed(2)}<br />` +
-    `<b>Receitas Totais:</b> ${Number(message.receitas).toFixed(2)}<br />`;
+    `<b>Despesas Totais:</b> <span class="deficit"> ${Number(
+      message.despesas
+    ).toFixed(2)} </span><br />` +
+    `<b>Receitas Totais:</b> <span class="sobra"> ${Number(
+      message.receitas
+    ).toFixed(2)} </span><br />`;
 
   if (Number(message.deficit) < 0) {
-    textMessage += `<b>Déficit:</b> <span class='deficit'>${Number(
+    textMessage += `<b>Défict:</b> <span class='deficit'>${Number(
       message.deficit
     ).toFixed(2)}</span><br />`;
   } else {
@@ -75,5 +79,10 @@ export const decodeTypeMessage = (
     ];
   }
 
-  return [];
+  return [
+    {
+      text: `Nenhum dado encontrado! Verifique se o item existe ou se a data está correta.`,
+      status: 'delivered', // Assuming the status is 'delivered' for error messages
+    },
+  ];
 };
