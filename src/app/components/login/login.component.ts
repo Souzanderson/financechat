@@ -18,6 +18,7 @@ export class LoginComponent {
   public password: string = '';
   public username: string = '';
   public loading: boolean = false;
+  public showPassword: boolean = false;
 
   // Add any methods or properties needed for the login functionality here
   login() {
